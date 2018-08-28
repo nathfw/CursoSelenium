@@ -33,9 +33,7 @@ public class TesteCampoTreinamento {
 		// Verificando o texto digitado
 		Assert.assertEquals("testando e agora vai", driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
 		// Para dar erro no teste
-		// Assert.assertEquals("testando e agora
-		// vai1",driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
-		driver.quit();
+		// --Assert.assertEquals("testando e agora vai1",driver.findElement(By.id("elementosForm:nome")).getAttribute("value"));
 	}
 
 	/*
@@ -108,10 +106,9 @@ public class TesteCampoTreinamento {
 		WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
 		Select combo = new Select(element);
 		// Selecionando por index , elementos que estão enumerados no html
-		// combo.selectByIndex(2);
-		// Selecionando por valor, aquilo que apresenta no value (elemento html) do
-		// combo
-		// combo.selectByValue("superior");
+		// --combo.selectByIndex(2);
+		// Selecionando por valor, aquilo que apresenta no value (elemento html) do combo
+		// --combo.selectByValue("superior");
 		// Selecionando pelo texto que está sendo exibido no combo
 		combo.selectByVisibleText("2o grau completo");
 		Assert.assertEquals("2o grau completo", combo.getFirstSelectedOption().getText());
@@ -181,8 +178,7 @@ public class TesteCampoTreinamento {
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		driver.manage().window().maximize();
-		// Para nao fazer duas buscas de elemento, colocamos o valor em uma instancia de
-		// webelement
+		// Para nao fazer duas buscas de elemento, colocamos o valor em uma instancia de webelement
 		WebElement botao = driver.findElement(By.id("buttonSimple"));
 		// clicando no botão a partir da variavel que acabamos de criar acima
 		botao.click();
@@ -195,7 +191,7 @@ public class TesteCampoTreinamento {
 	/*Irá clicar no link, mas ainda não fará nada*/
 	
 	@Test
-	@Ignore // Ignorar este
+	//@Ignore // Ignorar este
 	public void deveInteragirComLinks() {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\nathalia.santos\\drivers\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
@@ -204,7 +200,10 @@ public class TesteCampoTreinamento {
 		driver.manage().window().maximize();
 		driver.findElement(By.linkText("Voltar")).click();
 		// Irá falhar o teste
-		// Assert.fail();
+		//--Assert.fail();
+		
+		//Buscando pelo id do botão
+		Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
 	}
 		
 	/*Irá realizar a busca de um elemento na tela*/
@@ -216,6 +215,22 @@ public class TesteCampoTreinamento {
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		driver.manage().window().maximize();
+		
+		//Realizando busca por elemento na tela e printando no console
+		//--System.out.println(driver.findElement(By.tagName("body")).getText());
+		
+		// Verificar  que contém np body que é string, apesar de funcionar não é viavel e nao mostra aonde está
+		//--Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Campo de Treinamento"));
+		
+		//Verificando através da tag que o texto se encontra "h3"
+		Assert.assertEquals("Campo de Treinamento",
+				driver.findElement(By.tagName("h3")).getText());
+		
+		// Buscando elementos pelo elemento do html e trará todos que correspondam ao elemento buscado
+		//--Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", driver.findElement(By.tagName("span")).getText());
+		
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",
+				driver.findElement(By.className("facilAchar")).getText());
 
-	}
+			}
 }
